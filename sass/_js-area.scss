@@ -1,0 +1,104 @@
+// areaTitle start
+.areaTitle {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 36px;
+    color: #8A82CC;
+}
+// areaTitle end
+
+// areaContent start
+.areaContent {
+    margin-left: 25px;
+    .attractions {
+        background-color: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.20);
+        float: left;
+        width: 464px;
+        height: 280px;
+        margin-top: 24px;
+        margin-left: 16px;
+        margin-bottom: 18px;
+        @include ipad{
+            width: 45%;
+            height: 300px;
+            overflow: hidden;
+        }
+        @include iphone5{
+            margin-left: -5px;
+            width: 95%;
+            height: auto;
+            float: none;     
+        }
+        &__place{
+            position: relative;
+            &__img {
+                width: 464px;
+                height: 155px;
+            }
+            &__name {
+                position: absolute;
+                left: 22px;
+                top: 117px;
+                font-size: 24px;
+                color: #fff;
+                @include ipad{
+                    left: 15px
+                }
+            }
+            &__area {
+                position: absolute;
+                left: 391px;
+                top: 125px;
+                font-size: 16px;
+                color: #fff;
+                @include ipad{
+                    left: 15px;
+                    top: 90px
+                }
+            }
+        } 
+        &__info{
+            padding-top: 8px;
+            &__time{
+                padding-top: 7px;
+                padding-left: 23px;
+                @include ipad{
+                    padding-left: 15px
+                }
+                span{
+                    padding-left: 5px;
+                }
+            }
+            &__address{
+                padding-top: 6px;
+                padding-left: 24px;
+                span{
+                    padding-left: 5px;
+                }
+                @include ipad{
+                    padding-left: 16px
+                }
+            }
+            &__phone{
+                padding-top: 6px;
+                padding-left: 26px;
+                @include ipad{
+                    padding-left: 18px
+                }
+                span{
+                    padding-left: 6px;
+                }
+                .phone-fl-right{
+                    float: right;
+                    padding-right: 26px;
+                    @include iphone5{
+                        padding-top: 5px;
+                        float: none;
+                    }
+                }
+            }
+        }   
+    }
+}
+// areaContent end

@@ -1,0 +1,249 @@
+@charset "UTF-8";
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, em, img, ol, ul, li, form, tr, th, td {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+ul, ol, li {
+  list-style: none; }
+
+img {
+  max-width: 100%; }
+
+* {
+  box-sizing: border-box; }
+
+* {
+  font-family: "微軟正黑體"; }
+
+.wrap {
+  max-width: 1024px;
+  margin: 0 auto; }
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both; }
+
+.goTop {
+  display: block;
+  text-align: right; }
+
+.header {
+  background-image: url(../images/Hero.png);
+  height: 380px; }
+  .header__title {
+    text-align: center;
+    padding-top: 89px;
+    font-size: 40px;
+    color: #fff;
+    letter-spacing: 3.89px; }
+  .header__district {
+    width: 452px;
+    height: 48px;
+    padding-left: 5px;
+    margin-left: 293px;
+    margin-top: 86px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 3px solid #ffffff;
+    border-radius: 3px;
+    font-size: 18px;
+    line-height: 21px; }
+    @media (max-width: 1000px) {
+      .header__district {
+        width: 60%;
+        margin-left: 150px; } }
+    @media (max-width: 569px) {
+      .header__district {
+        margin-left: 30px;
+        width: 80%; } }
+  .header__hotArea {
+    margin-left: 112px;
+    margin-top: 80px;
+    width: 800px;
+    height: 112px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px; }
+    @media (max-width: 1000px) {
+      .header__hotArea {
+        width: 90%;
+        margin-left: 35px; } }
+    @media (max-width: 569px) {
+      .header__hotArea {
+        margin-left: 16px;
+        height: 180px; } }
+    .header__hotArea__title {
+      font-size: 18px;
+      padding-top: 20px;
+      padding-left: 26px; }
+    .header__hotArea__list {
+      padding-top: 14px;
+      padding-left: 51px; }
+      .header__hotArea__list__item {
+        width: 130px;
+        height: 42px;
+        margin-right: 23px;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 20px;
+        cursor: pointer; }
+        @media (min-width: 1024px) {
+          .header__hotArea__list__item:hover {
+            opacity: .5;
+            color: #000;
+            transition: all .5s; } }
+        @media (max-width: 1000px) {
+          .header__hotArea__list__item {
+            width: 20%; } }
+        @media (max-width: 569px) {
+          .header__hotArea__list__item {
+            width: 35%;
+            margin-top: 10px; } }
+
+.dashed {
+  position: relative;
+  margin-top: 133px; }
+  .dashed::before {
+    position: absolute;
+    left: 46px;
+    top: 10px;
+    content: "";
+    display: block;
+    width: 450px;
+    border: 1px dashed #8db4cf; }
+    @media (max-width: 1000px) {
+      .dashed::before {
+        width: 90%; } }
+    @media (max-width: 569px) {
+      .dashed::before {
+        width: 0px; } }
+  .dashed::after {
+    position: absolute;
+    right: 47px;
+    top: 10px;
+    content: "";
+    display: block;
+    width: 450px;
+    border: 1px dashed #8db4cf; }
+    @media (max-width: 1000px) {
+      .dashed::after {
+        width: 0px;
+        border: 0px; } }
+    @media (max-width: 569px) {
+      .dashed::after {
+        width: 0px; } }
+  .dashed__icon {
+    position: absolute;
+    left: 500px;
+    color: #8db4cf;
+    font-size: 20px;
+    border: 2px solid #8db4cf;
+    border-radius: 50%;
+    padding: 0px 4px; }
+    @media (max-width: 1000px) {
+      .dashed__icon {
+        display: none; } }
+
+.footer {
+  height: 90px;
+  background-color: #559AC8; }
+  .footer__item__title {
+    text-align: center;
+    padding-top: 24px;
+    font-size: 14px;
+    color: #fff; }
+  .footer__item__dataSource {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #FFD366; }
+
+.areaTitle {
+  margin-top: 200px;
+  text-align: center;
+  font-size: 36px;
+  color: #8A82CC; }
+
+.areaContent {
+  margin-left: 25px; }
+  .areaContent .attractions {
+    background-color: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    float: left;
+    width: 464px;
+    height: 280px;
+    margin-top: 24px;
+    margin-left: 16px;
+    margin-bottom: 18px; }
+    @media (max-width: 1000px) {
+      .areaContent .attractions {
+        width: 45%;
+        height: 300px;
+        overflow: hidden; } }
+    @media (max-width: 569px) {
+      .areaContent .attractions {
+        margin-left: -5px;
+        width: 95%;
+        height: auto;
+        float: none; } }
+    .areaContent .attractions__place {
+      position: relative; }
+      .areaContent .attractions__place__img {
+        width: 464px;
+        height: 155px; }
+      .areaContent .attractions__place__name {
+        position: absolute;
+        left: 22px;
+        top: 117px;
+        font-size: 24px;
+        color: #fff; }
+        @media (max-width: 1000px) {
+          .areaContent .attractions__place__name {
+            left: 15px; } }
+      .areaContent .attractions__place__area {
+        position: absolute;
+        left: 391px;
+        top: 125px;
+        font-size: 16px;
+        color: #fff; }
+        @media (max-width: 1000px) {
+          .areaContent .attractions__place__area {
+            left: 15px;
+            top: 90px; } }
+    .areaContent .attractions__info {
+      padding-top: 8px; }
+      .areaContent .attractions__info__time {
+        padding-top: 7px;
+        padding-left: 23px; }
+        @media (max-width: 1000px) {
+          .areaContent .attractions__info__time {
+            padding-left: 15px; } }
+        .areaContent .attractions__info__time span {
+          padding-left: 5px; }
+      .areaContent .attractions__info__address {
+        padding-top: 6px;
+        padding-left: 24px; }
+        .areaContent .attractions__info__address span {
+          padding-left: 5px; }
+        @media (max-width: 1000px) {
+          .areaContent .attractions__info__address {
+            padding-left: 16px; } }
+      .areaContent .attractions__info__phone {
+        padding-top: 6px;
+        padding-left: 26px; }
+        @media (max-width: 1000px) {
+          .areaContent .attractions__info__phone {
+            padding-left: 18px; } }
+        .areaContent .attractions__info__phone span {
+          padding-left: 6px; }
+        .areaContent .attractions__info__phone .phone-fl-right {
+          float: right;
+          padding-right: 26px; }
+          @media (max-width: 569px) {
+            .areaContent .attractions__info__phone .phone-fl-right {
+              padding-top: 5px;
+              float: none; } }

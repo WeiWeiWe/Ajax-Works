@@ -1,0 +1,153 @@
+// header start
+.header{
+    background-image: url(../images/Hero.png);
+    height: 380px;
+    &__title{
+        text-align: center;
+        padding-top: 89px;
+        font-size: 40px;
+        color: #fff;
+        letter-spacing: 3.89px;
+    }
+    &__district{
+        width: 452px;
+        height: 48px;
+        padding-left: 5px;
+        margin-left: 293px;
+        margin-top: 86px;
+        background-color: rgba(255,255,255,.7);
+        border: 3px solid #ffffff;
+        border-radius: 3px;
+        font-size: 18px;
+        line-height: 21px;
+        @include ipad{
+            width: 60%;
+            margin-left: 150px;
+        }
+        @include iphone5{
+            margin-left: 30px;
+            width: 80%;
+        }
+    }
+    &__hotArea{
+        margin-left: 112px;
+        margin-top: 80px;
+        width: 800px;
+        height: 112px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
+        border-radius:5px;
+        @include ipad{
+            width: 90%;
+            margin-left: 35px;
+        }
+        @include iphone5{
+            margin-left: 16px;
+            height: 180px;
+        }
+        &__title{
+            font-size: 18px;
+            padding-top: 20px;
+            padding-left: 26px;
+        }
+        &__list{
+            padding-top: 14px;
+            padding-left: 51px;
+            &__item{
+                width: 130px;
+                height: 42px;
+                margin-right: 23px;
+                border-radius: 5px;
+                color: #ffffff;
+                font-size: 20px;
+                cursor: pointer;
+                @include desktop{
+                    &:hover{
+                        opacity: .5;
+                        color: #000;
+                        transition: all .5s;
+                    }
+                }
+                @include ipad{
+                    width: 20%;
+                }
+                @include iphone5{
+                    width: 35%;
+                    margin-top: 10px;
+                }    
+            }
+        }
+    }
+}
+// header end
+
+// dashed start
+.dashed{
+    position: relative;
+    margin-top: 133px;
+    &::before{
+        position: absolute;
+        left:46px;
+        top:10px;
+        content: "";
+        display: block;
+        width: 450px; 
+        border: 1px dashed #8db4cf;
+        @include ipad{
+            width: 90%;
+        }
+        @include iphone5{
+            width: 0px;
+        }
+    }
+    &::after{
+        position: absolute;
+        right:47px;
+        top:10px;
+        content: "";
+        display: block;
+        width: 450px; 
+        border: 1px dashed #8db4cf;
+        @include ipad{
+            width: 0px;
+            border: 0px;
+        }
+        @include iphone5{
+            width: 0px;
+        }
+    }
+    &__icon{
+        position: absolute;
+        left: 500px;
+        color: #8db4cf;
+        font-size: 20px;
+        border: 2px solid #8db4cf;  
+        border-radius: 50%;      
+        padding: 0px 4px;
+        @include ipad{
+            display: none;
+        }
+    }
+}
+// dashed end
+
+// footer start
+.footer{
+    height: 90px;
+    background-color: #559AC8;
+    &__item{
+        &__title{
+            text-align: center;
+            padding-top: 24px;
+            font-size: 14px;
+            color: #fff;
+        }
+        &__dataSource{
+            text-align: center;
+            padding-top: 15px;
+            font-size: 14px;
+            color: #FFD366;
+        }
+    }
+}
+// footer end
