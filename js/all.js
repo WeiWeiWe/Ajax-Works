@@ -1,123 +1,117 @@
-// gotop start
-$(document).ready(function () {
-    $(".jq-goTop").hide();
-    $(window).scroll(function () {
-        let h = $("body,html").scrollTop();
-        // console.log(h);
+window.onload = () => {
+  getTravelData();
+};
 
-        if (h > 300) {
-            $(".jq-goTop").fadeIn();
-        } else {
-            $(".jq-goTop").fadeOut();
-        };
-    });
-    $(".jq-goTop").click(function () {
-        $("html,body").animate({
-            scrollTop: 0
-        });
-        return false;
-    });
-});
-// gotop end
-
-// Ajax 
-let xhr = new XMLHttpRequest();
-xhr.open('get', 'https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97', true);
-xhr.send(null);
-let data = [];
-let len;
-xhr.onload = function () {
-    data = JSON.parse(xhr.responseText).result.records;
-    len = data.length;
-}
-// Ajax 
-
-// Dom
-let district = document.querySelector('.js-district');
-let areaTitle = document.querySelector('.js-areaTitle');
-let areaContent = document.querySelector('.js-areaContent');
-let hotArea = document.querySelector('.js-hotArea-btn');
-// Dom
-
-// 監聽 
-district.addEventListener('change', getData, false);
-hotArea.addEventListener('click', btnClick, false);
-// 監聽
-
-
-function getData(e) {
-    let select = e.target.value;
-    let str = '';
-    for (let i = 0; i < len; i++) {
-        if (select == data[i].Zone) {
-            str += `
-            <div class="attractions">
-                <div class="attractions__place">
-                    <img class="attractions__place__img" src=${data[i].Picture1}>
-                    <h2 class="attractions__place__name">${data[i].Name}</h2>
-                    <h3 class="attractions__place__area">${data[i].Zone}</h3>
-                </div>
-                <div class="attractions__info">
-                    <div class="attractions__info__time">
-                        <img src="images/icons_clock.png">
-                        <span>${data[i].Opentime}</span>
-                    </div>
-                    <div class="attractions__info__address">
-                        <img src="images/icons_pin.png">
-                        <span>${data[i].Add}</span>
-                    </div>
-                    <div class="attractions__info__phone">
-                        <img src="images/icons_phone.png">
-                        <span>${data[i].Tel}</span>
-                        <div class="phone-fl-right">
-                            <img src="images/icons_tag.png">
-                            <span>免費參觀</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        }
-    }
-    areaTitle.textContent = select;
-    areaContent.innerHTML = str;
+function getTravelData() {
+  const url = "https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json";
+  getData(url).then(res => {
+    new TravelList(res);
+    new goTop(document.querySelector('.jq-goTop'));
+  });
 }
 
-
-function btnClick(e) {
-    let btn = e.target.value;
-    let str = '';
-    for (let i = 0; i < len; i++) {
-        if (btn == data[i].Zone) {
-            str += `
-            <div class="attractions">
-                <div class="attractions__place">
-                    <img class="attractions__place__img" src=${data[i].Picture1}>
-                    <h2 class="attractions__place__name">${data[i].Name}</h2>
-                    <h3 class="attractions__place__area">${data[i].Zone}</h3>
-                </div>
-                <div class="attractions__info">
-                    <div class="attractions__info__time">
-                        <img src="images/icons_clock.png">
-                        <span>${data[i].Opentime}</span>
-                    </div>
-                    <div class="attractions__info__address">
-                        <img src="images/icons_pin.png">
-                        <span>${data[i].Add}</span>
-                    </div>
-                    <div class="attractions__info__phone">
-                        <img src="images/icons_phone.png">
-                        <span>${data[i].Tel}</span>
-                        <div class="phone-fl-right">
-                            <img src="images/icons_tag.png">
-                            <span>免費參觀</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-        }
-        areaTitle.textContent = btn;
-        areaContent.innerHTML = str;
+function getData(url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = function() {
+      if (xhr.status === 200 || xhr.status === 304) {
+        resolve(JSON.parse(xhr.responseText).result.records);
+      } else {
+        reject(new Error(xhr.responseText));
+      }
     }
+    xhr.send();
+  });
+}
+
+class goTop {
+  constructor(elem, distance) {
+    this.elem = elem;
+    this.distance = distance;
+    this.handle();
+  }
+  handle() {
+    this.elem.onclick = function(){
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    window.onscroll = this.throttle(() => {
+      this.toggleDomE();
+    }, 100);
+  }
+  toggleDomE(){
+    this.elem.style.display = (document.documentElement.scrollTop || document.body.scrollTop) > (this.distance || 300) ? 'block' : 'none';
+  }
+  throttle(func, wait) {
+    let timer = null;
+    return function() {
+      if (timer) {clearTimeout(timer)};
+      timer = setTimeout(() => {
+        return typeof func === 'function' && func.apply(this, arguments);
+      }, wait);
+    }
+  }
+}
+
+class TravelList {
+  constructor(data) {
+    this.travelList = data;
+    this.init();
+  }
+  init() {
+    this.handle();
+  }
+  handle() {
+    const district = document.querySelector('.js-district');
+    const areaTitle = document.querySelector('.js-areaTitle');
+    const areaContent = document.querySelector('.js-areaContent');
+    const hotArea = document.querySelector('.js-hotArea-btn');
+    
+    district.addEventListener('change', renderHTML.bind(this));
+    hotArea.addEventListener('click', renderHTML.bind(this));
+
+    function renderHTML(e) {
+      const template = this.template(e.target.value, this.travelList);
+      areaTitle.textContent = e.target.value;
+      areaContent.innerHTML = template;
+    }
+  }
+  template(select, travelList) {
+    let str = '';
+    for (let i = 0; i < travelList.length; i++) {
+      if (select === travelList[i].Zone) {
+          str += `
+          <div class="attractions">
+              <div class="attractions__place">
+                  <img class="attractions__place__img" src=${travelList[i].Picture1}>
+                  <h2 class="attractions__place__name">${travelList[i].Name}</h2>
+                  <h3 class="attractions__place__area">${travelList[i].Zone}</h3>
+              </div>
+              <div class="attractions__info">
+                  <div class="attractions__info__time">
+                      <img src="images/icons_clock.png">
+                      <span>${travelList[i].Opentime}</span>
+                  </div>
+                  <div class="attractions__info__address">
+                      <img src="images/icons_pin.png">
+                      <span>${travelList[i].Add}</span>
+                  </div>
+                  <div class="attractions__info__phone">
+                      <img src="images/icons_phone.png">
+                      <span>${travelList[i].Tel}</span>
+                      <div class="phone-fl-right">
+                          <img src="images/icons_tag.png">
+                          <span>免費參觀</span>
+                      </div>
+                  </div> 
+              </div>
+          </div>
+          `;
+      }
+    }
+    return str;
+  }
 }
